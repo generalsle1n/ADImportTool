@@ -31,7 +31,7 @@ This tool provides the functionality to synchronize user data from multiple conn
 
 ## Demo 
 
-![Gif](https://github.com/generalsle1n/ADImportTool/blob/master/blob/demo1.gif)
+![Gif](https://raw.githubusercontent.com/generalsle1n/ADImportTool/main/blob/demo1.gif)
 
 
 ## Run Locally
