@@ -10,7 +10,7 @@ This tool provides the functionality to synchronize user data from multiple conn
 
 ## Authors
 
-- [@Niels Schuler](https://github.com/generalsle1n)
+- [@generalSle1n](https://github.com/generalsle1n)
 
 
 ## Acknowledgements
@@ -31,7 +31,7 @@ This tool provides the functionality to synchronize user data from multiple conn
 
 ## Demo 
 
-![Gif](https://raw.githubusercontent.com/generalsle1n/ADImportTool/main/blob/demo1.gif)
+![](https://raw.githubusercontent.com/generalsle1n/ADImportTool/main/blob/demo1.gif)
 
 
 ## Run Locally
