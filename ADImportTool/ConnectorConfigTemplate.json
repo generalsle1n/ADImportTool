@@ -1,0 +1,159 @@
+{
+  "Connectors": [
+    {
+      "Type": "ADImportTool.Classes.Connectors.Implemantations.JsonFileConnector",
+      "Name": "Auswertung1",
+      "Attributes": {
+        "Active": {
+          "Field": "",
+          "Manipulation": "",
+          "GenerateFrom": "",
+          "Destination": "",
+          "Type": "ADImportTool.Model.AttributeSettings"
+        },
+        "Mail": {
+          "Field": "Emailgeschaeftlich",
+          "Manipulation": "",
+          "GenerateFrom": "",
+          "Destination": "",
+          "Type": "ADImportTool.Model.AttributeSettings"
+        },
+        "FirstName": {
+          "Field": "Vorname",
+          "Manipulation": "",
+          "GenerateFrom": "",
+          "Destination": "givenName",
+          "Type": "ADImportTool.Model.AttributeSettings"
+        },
+        "LastName": {
+          "Field": "Nachname",
+          "Manipulation": "",
+          "GenerateFrom": "",
+          "Destination": "sn",
+          "Type": "ADImportTool.Model.AttributeSettings"
+        },
+        "FullName": {
+          "Field": "",
+          "Manipulation": "",
+          "GenerateFrom": "{Intent} {LastName}, {FirstName}",
+          "Destination": "displayName",
+          "Type": "ADImportTool.Model.AttributeSettings"
+        },
+        "Manager": {
+          "Field": "DisziplinarischerVorgesetzter",
+          "Manipulation": "",
+          "GenerateFrom": "",
+          "Destination": "manager",
+          "Type": "ADImportTool.Model.AttributeSettings"
+        },
+        "UnresolvedManager": {
+          "Field": "DisziplinarischerVorgesetzter",
+          "Manipulation": "GetFirstLeading=4",
+          "GenerateFrom": "",
+          "Destination": "",
+          "Type": "ADImportTool.Model.AttributeSettings"
+        },
+        "Position": {
+          "Field": "PositionSignatur",
+          "Manipulation": "",
+          "GenerateFrom": "",
+          "Destination": "description",
+          "Type": "ADImportTool.Model.AttributeSettings"
+        },
+        "CostCenter": {
+          "Field": "Kostenstelle",
+          "Manipulation": "",
+          "GenerateFrom": "",
+          "Destination": "",
+          "Type": "ADImportTool.Model.AttributeSettings"
+        },
+        "EmployeeNumber": {
+          "Field": "Personalnummer",
+          "Manipulation": "RemoveLeading=3",
+          "GenerateFrom": "",
+          "Destination": "employeeID",
+          "Type": "ADImportTool.Model.AttributeSettings"
+        },
+        "TimecardNumber": {
+          "Field": "Zeitkartennummer",
+          "Manipulation": "RemoveLeading=6",
+          "GenerateFrom": "",
+          "Destination": "extensionAttribute8",
+          "Type": "ADImportTool.Model.AttributeSettings"
+        },
+        "Salution": {
+          "Field": "Anrede",
+          "Manipulation": "",
+          "GenerateFrom": "",
+          "Destination": "",
+          "Type": "ADImportTool.Model.AttributeSettings"
+        },
+        "Area": {
+          "Field": "Bereichszuordnung",
+          "Manipulation": "",
+          "GenerateFrom": "",
+          "Destination": "division",
+          "Type": "ADImportTool.Model.AttributeSettings"
+        },
+        "Department": {
+          "Field": "Abteilungszuordnung",
+          "Manipulation": "",
+          "GenerateFrom": "",
+          "Destination": "department",
+          "Type": "ADImportTool.Model.AttributeSettings"
+        },
+        "Team": {
+          "Field": "Team",
+          "Manipulation": "",
+          "GenerateFrom": "",
+          "Destination": "",
+          "Type": "ADImportTool.Model.AttributeSettings"
+        },
+        "Intent": {
+          "Field": "Vorsatz",
+          "Manipulation": "",
+          "GenerateFrom": "",
+          "Destination": "",
+          "Type": "ADImportTool.Model.AttributeSettings"
+        },
+        "Type": "ADImportTool.Model.Attributes"
+      },
+      "Priority": 100,
+      "DataSource": "Datasource",
+      "JsonArrayStart": "Arbeitnehmer",
+      "ADPrimaryKey": "employeeID",
+      "ADClearProperty": "",
+      "ManagerSettings": {
+        "Enabled": true,
+        "ResolveManagerBy": "EmployeeNumber",
+        "Type": "ADImportTool.Model.ManagerSettings"
+      },
+      "PreStartSync": {
+        "Path": "",
+        "Arguments": "",
+        "RequiredForSync": true,
+        "Enabled": true,
+        "Type": "ADImportTool.Model.PreStartSync"
+      }
+    }
+  ],
+  "DomainName": "domainName",
+  "Port": "389",
+  "UserName": "user",
+  "Password": "pass",
+  "SearchBase": "SearchBase",
+  "DefaultFilter": "(&(objectClass=user)(memberOf:1.2.840.113556.1.4.1941:=GroupName))",
+  "RefreshTime": 30,
+  "Name": "ADImportTool",
+  "Logging": {
+    "Template": "[{Timestamp:yyyy:mm:dd HH:mm:ss.fff}]--{Level}-- {Message:lj}{NewLine}{Exception}",
+    "LogFolder": "Log",
+    "LogName": "ADImport.log",
+    "Mail": {
+      "Server": "",
+      "Port": 25,
+      "Recipient": [],
+      "SourceMail": ""
+    }
+  }
+}
