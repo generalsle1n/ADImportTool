@@ -6,7 +6,7 @@ This tool provides the functionality to synchronize user data from multiple conn
 
 
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
-[![BuildTestAndPublish](https://github.com/generalsle1n/ADImportTool/actions/workflows/buildApp.yml/badge.svg?branch=master)](https://github.com/generalsle1n/ADImportTool/actions/workflows/buildApp.yml)
+[![BuildTestAndPublish](https://github.com/generalsle1n/ADImportTool/actions/workflows/main.yml/badge.svg)](https://github.com/generalsle1n/ADImportTool/actions/workflows/main.yml)
 
 ## Authors
 
