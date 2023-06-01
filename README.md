@@ -29,7 +29,9 @@ This tool provides the functionality to synchronize user data from multiple conn
 ![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 
 
+## Demo 
 
+![Gif](https://github.com/generalsle1n/ADImportTool/blob/master/blob/demo1.gif)
 
 
 ## Run Locally
@@ -177,11 +179,8 @@ All the fields need an json object after the upper settings decleration
 `DefaultFilter`: Enter an valid Ldap Searchstring, only the user that match that, get synced **string**
 
 `RefreshTime`: Enter the time in minutes how long it waits betwenn an cylce **int**
-## Sync Cycle
-![](https://github.com/generalsle1n/ADImportTool/blob/master/blob/demo1.gif)
-
 
 ## Feedback
 
-If you have any feedback, please reach out to us at it@wehrle-werk.de
+If you have any feedback, please open an issue or an pr
 
