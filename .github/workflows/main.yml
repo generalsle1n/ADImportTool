@@ -1,0 +1,281 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: BuildTestAndPublish
+
+env:
+  DOTNETOPTIONS: "--configuration RELEASE -p:PublishReadyToRun=true -p:PublishSingleFile=true -p:PublishTrimmed=true"
+  ZIPEXLUSIONS: "*.pdb"
+  NAME: "ADImportTool"
+  
+  WINX64ARCH: win-x64
+  WINX64RELEASEPATH: "/bin/Release/net6.0/win-x64/publish/"
+  WINX64ZIPNAME: "Release-winx64.zip"
+  
+  WINX32ARCH: win-x86
+  WINX32RELEASEPATH: "/bin/Release/net6.0/win-x86/publish/"
+  WINX32ZIPNAME: "Release-win-x86.zip"
+  
+  WINARM64ARCH: win-arm64
+  WINARM64RELEASEPATH: "/bin/Release/net6.0/win-arm64/publish/"
+  WINARM64ZIPNAME: "Release-win-arm64.zip"
+  
+  LINUXX64: linux-x64
+  LINUXX64RELEASEPATH: "/bin/Release/net6.0/linux-x64/publish/"
+  LINUXX64ZIPNAME: "Release-linux-x64.zip"
+  
+  LINUXMUSLX64ARCH: linux-musl-x64
+  LINUXMUSLX64RELEASEPATH: "/bin/Release/net6.0/linux-musl-x64/publish/"
+  LINUXMUSLX64ZIPNAME: "Release-linux-musl-x64.zip"
+  
+  LINUXARMARCH: linux-arm
+  LINUXARMRELEASEPATH: "/bin/Release/net6.0/linux-arm/publish/"
+  LINUXARMZIPNAME: "Release-linux-arm.zip"
+  
+  LINUXARM64ARCH: linux-arm64
+  LINUXARM64RELEASEPATH: "/bin/Release/net6.0/linux-arm64/publish/"
+  LINUXARM64ZIPNAME: "Release-linux-arm64.zip"
+  
+  PROJECTPATH: "/home/runner/work/ADImportTool/ADImportTool/ADImportTool/"
+  
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:       
+  BuildWINX64:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0.x
+      - name: Restore dependencies
+        run: dotnet restore --disable-parallel
+      - name: Build Windows x64
+        run: dotnet publish --runtime $WINX64ARCH $DOTNETOPTIONS
+      - uses: actions/upload-artifact@master
+        with:
+          name: ${{env.WINX64ARCH}}
+          path: ${{env.PROJECTPATH}}${{env.WINX64RELEASEPATH}}
+    
+  BuildWINX32:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0.x
+      - name: Restore dependencies
+        run: dotnet restore --disable-parallel
+      - name: Build Windows x32
+        run: dotnet publish --runtime $WINX32ARCH $DOTNETOPTIONS
+      - uses: actions/upload-artifact@master
+        with:
+          name: ${{env.WINX32ARCH}}
+          path: ${{env.PROJECTPATH}}${{env.WINX32RELEASEPATH}}
+        
+  BuildWINARM64:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0.x
+      - name: Restore dependencies
+        run: dotnet restore --disable-parallel
+      - name: Build Windows ARM64
+        run: dotnet publish --runtime $WINARM64ARCH $DOTNETOPTIONS
+      - uses: actions/upload-artifact@master
+        with:
+          name: ${{env.WINARM64ARCH}}
+          path: ${{env.PROJECTPATH}}${{env.WINARM64RELEASEPATH}}
+        
+  BuildLINUXX64:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0.x
+      - name: Restore dependencies
+        run: dotnet restore --disable-parallel
+      - name: Build Linux x64
+        run: dotnet publish --runtime $LINUXX64 $DOTNETOPTIONS
+      - uses: actions/upload-artifact@master
+        with:
+          name: ${{env.LINUXX64}}
+          path: ${{env.PROJECTPATH}}${{env.LINUXX64RELEASEPATH}}
+        
+  BuildLINUXMUSLX64:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0.x
+      - name: Restore dependencies
+        run: dotnet restore --disable-parallel
+      - name: Build Linux Musl x64
+        run: dotnet publish --runtime $LINUXMUSLX64ARCH $DOTNETOPTIONS
+      - uses: actions/upload-artifact@master
+        with:
+          name: ${{env.LINUXMUSLX64ARCH}}
+          path: ${{env.PROJECTPATH}}${{env.LINUXMUSLX64RELEASEPATH}}
+        
+  BuildLINUXARMX32:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0.x
+      - name: Restore dependencies
+        run: dotnet restore --disable-parallel
+      - name: Build Linux Arm
+        run: dotnet publish --runtime $LINUXARMARCH $DOTNETOPTIONS
+      - uses: actions/upload-artifact@master
+        with:
+          name: ${{env.LINUXARMARCH}}
+          path: ${{env.PROJECTPATH}}${{env.LINUXARMRELEASEPATH}}
+        
+  BuildLINUXARMX64:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0.x
+      - name: Restore dependencies
+        run: dotnet restore --disable-parallel
+      - name: Build Linux Arm X64
+        run: dotnet publish --runtime $LINUXARM64ARCH $DOTNETOPTIONS
+      - uses: actions/upload-artifact@master
+        with:
+          name: ${{env.LINUXARM64ARCH}}
+          path: ${{env.PROJECTPATH}}${{env.LINUXARM64RELEASEPATH}}
+    
+  ZIPANDCREATERELEASE:
+    needs: [BuildWINX64, BuildWINX32, BuildWINARM64, BuildLINUXX64, BuildLINUXMUSLX64, BuildLINUXARMX32, BuildLINUXARMX64]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Build ${{env.WINX64ARCH}}
+        uses: actions/download-artifact@master
+        with:
+          name: ${{env.WINX64ARCH}}
+          path: ${{env.PROJECTPATH}}${{env.WINX64RELEASEPATH}}
+          
+      - name: Download Build ${{env.WINX32ARCH}}
+        uses: actions/download-artifact@master
+        with:
+          name: ${{env.WINX32ARCH}}
+          path: ${{env.PROJECTPATH}}${{env.WINX32RELEASEPATH}}
+          
+      - name: Download Build ${{env.WINARM64ARCH}}
+        uses: actions/download-artifact@master
+        with:
+          name: ${{env.WINARM64ARCH}}
+          path: ${{env.PROJECTPATH}}${{env.WINARM64RELEASEPATH}}
+          
+      - name: Download Build ${{env.LINUXX64}}
+        uses: actions/download-artifact@master
+        with:
+          name: ${{env.LINUXX64}}
+          path: ${{env.PROJECTPATH}}${{env.LINUXX64RELEASEPATH}}
+          
+      - name: Download Build ${{env.LINUXMUSLX64ARCH}}
+        uses: actions/download-artifact@master
+        with:
+          name: ${{env.LINUXMUSLX64ARCH}}
+          path: ${{env.PROJECTPATH}}${{env.LINUXMUSLX64RELEASEPATH}}
+          
+      - name: Download Build ${{env.LINUXARMARCH}}
+        uses: actions/download-artifact@master
+        with:
+          name: ${{env.LINUXARMARCH}}
+          path: ${{env.PROJECTPATH}}${{env.LINUXARMRELEASEPATH}}
+          
+      - name: Download Build ${{env.LINUXARM64ARCH}}
+        uses: actions/download-artifact@master
+        with:
+          name: ${{env.LINUXARM64ARCH}}
+          path: ${{env.PROJECTPATH}}${{env.LINUXARM64RELEASEPATH}}
+      
+      - name: Zip Release Windows x64
+        uses: TheDoctor0/zip-release@0.7.1
+        with:
+          filename: ${{env.WINX64ZIPNAME}}
+          path: ${{env.NAME}}${{env.WINX64RELEASEPATH}}
+          exclusions: ${{env.ZIPEXLUSIONS}}
+    
+      - name: Zip Release Windows x32
+        uses: TheDoctor0/zip-release@0.7.1
+        with:
+          filename: ${{env.WINX32ZIPNAME}}
+          path: ${{env.NAME}}${{env.WINX32RELEASEPATH}}
+          exclusions: ${{env.ZIPEXLUSIONS}}
+
+      - name: Zip Release Windows ARM64
+        uses: TheDoctor0/zip-release@0.7.1
+        with:
+          filename: ${{env.WINARM64ZIPNAME}}
+          path: ${{env.NAME}}${{env.WINARM64RELEASEPATH}}
+          exclusions: ${{env.ZIPEXLUSIONS}}
+
+      - name: Zip Release Linux x64
+        uses: TheDoctor0/zip-release@0.7.1
+        with:
+          filename: ${{env.LINUXX64ZIPNAME}}
+          path: ${{env.NAME}}${{env.LINUXX64RELEASEPATH}}
+          exclusions: ${{env.ZIPEXLUSIONS}}
+
+      - name: Zip Release Linux Musl x64
+        uses: TheDoctor0/zip-release@0.7.1
+        with:
+          filename: ${{env.LINUXMUSLX64ZIPNAME}}
+          path: ${{env.NAME}}${{env.LINUXMUSLX64RELEASEPATH}}
+          exclusions: ${{env.ZIPEXLUSIONS}}
+
+      - name: Zip Release Linux ARM
+        uses: TheDoctor0/zip-release@0.7.1
+        with:
+          filename: ${{env.LINUXARMZIPNAME}}
+          path: ${{env.NAME}}${{env.LINUXARMRELEASEPATH}}
+          exclusions: ${{env.ZIPEXLUSIONS}}
+
+      - name: Zip Release Linux ARM64
+        uses: TheDoctor0/zip-release@0.7.1
+        with:
+          filename: ${{env.LINUXARM64ZIPNAME}}
+          path: ${{env.NAME}}${{env.LINUXARM64RELEASEPATH}}
+          exclusions: ${{env.ZIPEXLUSIONS}}
+
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "*.zip"
+          tag: release-${{ github.run_id }}
+          generateReleaseNotes: true
+          token: ${{ secrets.GITHUBTOKEN }}
+          
+  CleanUpArtifacts:
+    needs: [ZIPANDCREATERELEASE]
+    name: Remove not required Atrifacts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: geekyeggo/delete-artifact@v2
+        with:
+          name: |
+            ${{env.WINX64ARCH}}
+            ${{env.WINX32ARCH}}
+            ${{env.WINARM64ARCH}}
+            ${{env.LINUXX64}}
+            ${{env.LINUXMUSLX64ARCH}}
+            ${{env.LINUXARMARCH}}
+            ${{env.LINUXARM64ARCH}}
